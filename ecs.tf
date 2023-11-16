@@ -23,7 +23,7 @@ resource "aws_ecs_task_definition" "pc_console_task_def" {
   requires_compatibilities = ["FARGATE"]
   cpu                      = var.fargate_cpu
   memory                   = var.fargate_memory
-  container_definitions    = file("./twistlock-console.json")
+  container_definitions    = file(var.container_def_path)
   volume {
     name = "compute_root_volume"
 
@@ -33,14 +33,21 @@ resource "aws_ecs_task_definition" "pc_console_task_def" {
       transit_encryption      = "ENABLED"
     }
   }
+  runtime_platform {
+    operating_system_family = "LINUX"
+    cpu_architecture        = "X86_64"
+  }
 }
 
 resource "aws_ecs_service" "ecs_main_service" {
-  name            = "${var.unique_prefix}-pc-console-service"
+  name            = "pc-console"
   cluster         = aws_ecs_cluster.ecs_main_cluster.id
   task_definition = aws_ecs_task_definition.pc_console_task_def.arn
   desired_count   = 1
   launch_type     = "FARGATE"
+  deployment_minimum_healthy_percent  = 0
+  deployment_maximum_percent = 100
+  enable_ecs_managed_tags = true
 
   network_configuration {
     security_groups  = [aws_security_group.nlb_sg.id]

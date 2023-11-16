@@ -35,3 +35,4 @@ terraform.rc
 
 # Ignore Twistlock Container Definition File
 twistlock-console.json
+full-twistlock-console-def.json

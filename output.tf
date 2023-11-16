@@ -5,3 +5,7 @@
 output "nlb_fqdn" {
   value       = aws_alb.main_nlb.dns_name
 }
+
+output "efs_id" {
+  value       = aws_efs_file_system.pc_console_fargate_efs.id
+}

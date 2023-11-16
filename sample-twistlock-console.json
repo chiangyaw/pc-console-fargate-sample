@@ -1,0 +1,54 @@
+[
+      {
+        "portMappings": [
+          {
+            "hostPort": 8083,
+            "protocol": "tcp",
+            "containerPort": 8083
+          },
+          {
+            "hostPort": 8084,
+            "protocol": "tcp",
+            "containerPort":8084
+          }
+        ],
+        "environment": [
+          {
+            "name": "COMMUNICATION_PORT",
+            "value": "8084"
+          },
+          {
+            "name": "CONSOLE_CN",
+            "value": "my-fargate-console-dns-address.elb.us-east-1.amazonaws.com"
+          },
+          {
+            "name": "DATA_RECOVERY_ENABLED",
+            "value": "true"
+          },
+          {
+            "name": "LOG_PROD",
+            "value": "true"
+          },
+          {
+            "name": "MANAGEMENT_PORT_HTTPS",
+            "value": "8083"
+          },
+          {
+            "name": "FIPS_ENABLED",
+            "value": "false"
+          },
+          {
+            "name": "CONFIG_DATA",
+            "value": "REFUQV9GT0xERVI9L3Zhci9saWIvdHdpc3Rsb2NrCkNPTU1VTklDQVRJT05fUE9SVD04MDg0CkRFRkVOREVSX0NOPQpEQVRBX1JFQ09WRVJZX1ZPTFVNRT0vdmFyL2xpYi90d2lzdGxvY2stYmFja3VwCkRPQ0tFUl9UV0lTVExPQ0tfVEFHPV8zMV8wMl8xMzcKREFUQV9SRUNPVkVSWV9FTkFCTEVEPXRydWUKUkVBRF9PTkxZX0ZTPXRydWUKUlVOX0NPTlNPTEVfQVNfUk9PVD1mYWxzZQpET0NLRVJfU09DS0VUPS92YXIvcnVuL2RvY2tlci5zb2NrCkZJUFNfRU5BQkxFRD1mYWxzZQpESVNBQkxFX0NPTlNPTEVfQ0dST1VQX0xJTUlUUz1mYWxzZQpNQU5BR0VNRU5UX1BPUlRfSFRUUD0KTUFOQUdFTUVOVF9QT1JUX0hUVFBTPTgwODMKQ09OU09MRV9DTj0KU1lTVEVNRF9FTkFCTEVEPWZhbHNlClNFTElOVVhfTEFCRUw9ZGlzYWJsZQ=="
+          }
+        ],
+        "mountPoints": [
+          {
+            "containerPath": "/var/lib/",
+            "sourceVolume": "compute_root_volume"
+          }
+        ],
+        "image": "registry-auth.twistlock.com/tw_abc-123/twistlock/console:console_31_02_137",
+        "name": "twistlock-console"
+      }
+]

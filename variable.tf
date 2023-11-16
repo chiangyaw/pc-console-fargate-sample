@@ -40,3 +40,8 @@ variable "ecs_task_execution_role_name" {
   description = "ECS task execution role name"
   default = "ECSTaskExecutionRole"
 }
+
+variable "container_def_path" {
+  description = "Container Definition Path"
+  default = "./twistlock-console.json"
+}
