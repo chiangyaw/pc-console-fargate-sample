@@ -2,7 +2,7 @@
 #   value       = data.aws_availability_zones.azs.names
 # }
 
-output "nlb_fqdn" {
+output "nlb_dns_name" {
   value       = aws_alb.main_nlb.dns_name
 }
 

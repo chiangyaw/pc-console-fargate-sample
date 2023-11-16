@@ -28,9 +28,9 @@ The sample Terraform script will covers the a full deployment from VPC, Subnets,
 --cpu-limit 2048 \
 --efs-volume fs-12345678
 ```
-Copy only the container definition portion (you can look into ```sample-twistlock-console.json``` as an example) and paste into the directory, so that you can run it together as part of the Terraform scripts. Make sure you modify the name and the path as ```var.container_def_path```. 
+3. Copy only the container definition portion (you can look into ```sample-twistlock-console.json``` as an example) and paste into the directory, so that you can run it together as part of the Terraform scripts. Make sure you modify the name and the path as ```var.container_def_path```. 
 
-**Note: You probably will ask the question why do we need to generate a mock up fargate tasks definition file. The main reason is because I'm using the same set of Terraform scripts to generate other components such as EFS & NLB, which is required as part of the task definition file, and these parameters are not available at this stage yet. Therefore would require the mock up template.**
+**Note: You probably will ask the question why do we need to generate a mock up fargate tasks definition file. The main reason is because I'm using the same set of Terraform scripts to generate other components such as NLB, which is required as part of the task definition file, and these parameters are not available at this stage yet. Therefore would require the mock up template.**
 
 3. To start off, first prepare ```variable.tf``` file or create ```terraform.tfvars``` file to define the variables required. The template includes some default value of the variables for your reference.
 
@@ -38,7 +38,11 @@ Copy only the container definition portion (you can look into ```sample-twistloc
 
 5. Once the AWS accounts, credentials have been setup, execute ```terraform init``` and ```terraform apply``` on your terminal.
 
-6. Once everything is deployed successfully, you should see an output of ```nlb_dns_name```, which you can use to access Prisma Cloud Compute Edition Console via ```https://<nlb_dns_name>:8083```. Do allow 5-10 minutes for the ECS Fargate to be provisioned.
+6. Once everything is deployed successfully, you should see an output of ```nlb_dns_name``` & ```efs_id```, which can be used to re-generate the task definition (similar to what you do in step 3).
+
+7. Once you have done this, just re-run ```terraform apply```.
+
+8. Once done, you should be able to access the console via ```https://<nlb_dns_name>:8083```. Do allow 5-10 minutes for the ECS Fargate to be provisioned.
 
 ## Clean Up
 To remove the testing environment, just do a ```terraform destroy```.
